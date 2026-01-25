@@ -28,7 +28,21 @@ const fastClickerUpgradeCostSpan = document.getElementById('fast-clicker-upgrade
 const cpsDisplay = document.getElementById('cps-display');
 const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
+const alertBox = document.getElementById('alert');
 const clickSound = new Audio('sounds/$$.mp3');
+
+// Message showing loaded save
+function displayLoadSaveMessage() {
+  alertBox.classList.remove('hidden');
+  setTimeout(() => {
+    alertBox.classList.add('hidden');
+  }, 3000);
+}
+
+// alert when game saved
+function displayMessage() {
+ alert("Game Successfully Saved!");
+}
 
 // play sound
 function playClickSound() {
@@ -64,6 +78,7 @@ function loadGame() {
     fastClickerUpgradeCost = gameSaveData.fastClickerUpgradeCost;
     updateUI();
     log.log('Game Loaded: $' + money.toFixed(2));
+    displayLoadSaveMessage();
   } else {
     log.log('No save data found.');
   }

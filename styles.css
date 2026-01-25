@@ -277,3 +277,17 @@ footer a {
 footer a:hover {
     color: var(--accent);
 }
+
+
+/* The alert message box */
+#alert {
+  padding: 20px;
+  font-size: medium;
+  background-color: #eea51e; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+.hidden {
+  display: none;
+}
