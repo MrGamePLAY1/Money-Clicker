@@ -28,6 +28,13 @@ const fastClickerUpgradeCostSpan = document.getElementById('fast-clicker-upgrade
 const cpsDisplay = document.getElementById('cps-display');
 const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
+const clickSound = new Audio('sounds/$$.mp3');
+
+// play sound
+function playClickSound() {
+  clickSound.currentTime = 0; // Rewind to the start
+  clickSound.play();
+}
 
 // Auto save every 5 minutes
 function autoSave() {
