@@ -147,18 +147,23 @@ button {
 #click-btn {
   width: 200px;
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #0b1728;
+  color: #ffffff;
   box-shadow: 0 12px 30px rgba(52, 211, 153, 0.25);
 }
 
 /* --------------CPS Upgrade ------------- */
 
 #cps-upgrade {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 200px;
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #e8edf7;
+  box-shadow: 0 12px 30px rgba(52, 76, 211, 0.25);
+  cursor: url('images/cursor.png'), pointer;
   display: none;
+  padding: 10px;
 }
 
 #click-btn:active,
@@ -169,11 +174,15 @@ button {
 /* --------------------------------------- */
 /* ---------------Super Clicker ----------*/
 #fast-clicker-upgrade {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 200px;
   background: linear-gradient(135deg, #7c3aed, #6d28d9);
   color: #f3e8ff;
+  box-shadow: 0 12px 30px rgba(161, 52, 211, 0.25);
   display: none;
+  padding: 10px;
 }
 
  /* --------------------------------------- */

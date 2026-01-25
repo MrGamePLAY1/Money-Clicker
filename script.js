@@ -152,12 +152,12 @@ function updateUI() {
 
   // Unlock auto clicker
   if (money >= clickerupgradeCost) {
-    cpsUpgradeBtn.style.display = 'inline-block';
+    cpsUpgradeBtn.style.display = 'flex';
   }
 
   // Unlock fast clicker
     if (money >= fastClickerUpgradeCost) {
-      fastClickerUpgradeBtn.style.display = 'inline-block';
+      fastClickerUpgradeBtn.style.display = 'flex';
     }
 }
 
