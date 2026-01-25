@@ -111,7 +111,7 @@ button {
   width: auto;
   height: auto;
   min-width: 60px;
-  background: linear-gradient(135deg, var(--accent-2), #3b82f6);
+  background: linear-gradient(135deg, var(--accent-2), #f63b3b);
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(34, 130, 247, 0.25);
   margin: 0;

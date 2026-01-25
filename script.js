@@ -126,7 +126,7 @@ fastClickerUpgradeBtn.addEventListener('click', () => {
         moneyDisplay.innerText = money.toLocaleString();
         fastClickerUpgradeCost *= 1.3; // Increase cost
         // Update CPS display
-        cpsDisplay.textContent = cps_display += 2;
+        cpsDisplay.textContent = cps_display += 3;
         updateUI();
     }
 });
