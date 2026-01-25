@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Clicker</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div class="game-card">
+        <button id="save-btn">Save</button>
+        <button id="load-save-btn">Load Save</button>
+        <h1>Bank Balance</h1>
+
+        <img id="dollar" src="images/dollar.png" alt="Money Bag" class="money-bag" width="50px" height="50px">
+
+        <h2 id="balance-container">$<span id="money-display">0</span></h2>
+
+        <button id="click-btn">Print Money</button>
+        <div class="meta">
+            CPS: <span id="cps-display"></span>
+        </div>
+
+        <div class="shop">
+            <div class="shop-header">
+                <h3 id="upgrade-text">Upgrades</h3>
+            </div>
+
+            <div class="upgrade-grid">
+                <!-- Updgrade 1     (Auto Clicker)------------------------ -->
+                <button id="cps-upgrade" class="upgrade hidden">
+                    <div class="upgrade-left">
+                        <div class="upgrade-title">Auto Clicker</div>
+                        <div class="upgrade-desc">+1 per second</div>
+                    </div>
+                    <div class="upgrade-right">
+                        <span class="cost">Cost $<span id="cps-upgrade-cost"></span></span>
+                    </div>
+                </button>
+                <!-- ---------------------------------------------------- -->
+
+                <!-- Upgrade 2 (fast Clicker) -->
+                <button id="fast-clicker-upgrade" class="upgrade hidden">
+                    <div class="upgrade-left">
+                        <div class="upgrade-title">Fast Auto Clicker</div>
+                        <div class="upgrade-desc">+2 per second</div>
+                    </div>
+                    <div class="upgrade-right">
+                        <span class="cost">Cost $<span id="fast-clicker-upgrade-cost"></span></span>
+                    </div>
+                </button>
+                <!-- ---------------------------------------------------- -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
