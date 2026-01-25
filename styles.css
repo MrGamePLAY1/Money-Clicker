@@ -27,6 +27,8 @@
 body {
   font-family: 'Space Grotesk', 'Sora', system-ui, -apple-system, sans-serif;
   display: flex;
+  flex-direction: column; /* Stack card and footer */
+  gap: 2rem; /* Space between them */
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -36,7 +38,14 @@ body {
   padding: clamp(1rem, 3vw, 2.5rem);
 }
 
-p {
+/* p {
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  color: var(--muted);
+} */
+
+#about {
   max-width: 520px;
   margin-bottom: 1.5rem;
   line-height: 1.5;
@@ -216,4 +225,46 @@ button:hover {
 
 .upgrade-right .cost {
   font-weight: 700;
+}
+
+/* Footer Styling */
+footer {
+    background: var(--card); 
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    width: min(90vw, 360px); /* Smaller box width */
+    box-shadow: var(--shadow);
+    
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Remove margin-top as body gap handles it */
+/* #game-footer { ... } removed as it was unused/duplicate */
+
+footer h5 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.8rem 0;
+}
+
+footer a {
+    color: var(--accent-2);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: var(--accent);
 }
