@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 
 - **Visual Effects:**
   - Pop animation effect when clicking the money bag.
+  
+- **Sound Affects:**
+  - Added sound when print money is clicked. 
 
 - **UI Improvements:**
   - Dynamic display of current bank balance.
