@@ -16,6 +16,7 @@ let cps_display = 0; // clicks per second (Display)
 // Upgrade Costs
 let clickerupgradeCost = 0.1;
 let fastClickerUpgradeCost = 1;
+let printerUpgradeCost = 15;
 
 
 // Elements
@@ -25,11 +26,13 @@ const cpsUpgradeCostSpan = document.getElementById('cps-upgrade-cost');
 const cpsUpgradeBtn = document.getElementById('cps-upgrade');
 const fastClickerUpgradeBtn = document.getElementById('fast-clicker-upgrade');
 const fastClickerUpgradeCostSpan = document.getElementById('fast-clicker-upgrade-cost');
+const printerUpgradeCostSpan = document.getElementById('printer-upgrade-cost');
 const cpsDisplay = document.getElementById('cps-display');
 const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
 const alertBox = document.getElementById('alert');
 const clickSound = new Audio('sounds/$$.mp3');
+const printerUpgradeBtn = document.getElementById('printer-upgrade');
 
 // Message showing loaded save
 function displayLoadSaveMessage() {
@@ -50,7 +53,7 @@ function playClickSound() {
   clickSound.play();
 }
 
-// Auto save every 5 minutes
+// Auto save every 2 minutes
 function autoSave() {
   const autoSave = {
     money: money,
@@ -153,6 +156,21 @@ fastClickerUpgradeBtn.addEventListener('click', () => {
     }
 });
 
+// Printer Upgrade Logic
+printerUpgradeBtn.addEventListener('click', () => {
+    if (money >= printerUpgradeCost) {
+        money -= printerUpgradeCost;
+        cps += 10; // Increase CPS by 5
+        clickPower += 0.1; // Increase click power
+        moneyDisplay.innerText = money.toLocaleString();
+        printerUpgradeCost *= 1.3; // Increase cost
+        // Update CPS display
+        cpsDisplay.textContent = cps_display += 10;
+        updateUI();
+      }
+    }
+  );
+
 // Auto income
 setInterval(() => {
   money += cps * 0.01;
@@ -171,6 +189,7 @@ function updateUI() {
   // Show current auto-clicker cost
   cpsUpgradeCostSpan.textContent = clickerupgradeCost.toFixed(2);
   fastClickerUpgradeCostSpan.textContent = fastClickerUpgradeCost.toFixed(2);
+  printerUpgradeCostSpan.textContent = printerUpgradeCost.toFixed(2);
 
   // Unlock auto clicker
   if (money >= clickerupgradeCost) {
@@ -180,6 +199,11 @@ function updateUI() {
   // Unlock fast clicker
     if (money >= fastClickerUpgradeCost) {
       fastClickerUpgradeBtn.style.display = 'flex';
+    }
+
+    // Unlock printer upgrade
+    if (money >= printerUpgradeCost) {
+      printerUpgradeBtn.style.display = 'flex';
     }
 }
 

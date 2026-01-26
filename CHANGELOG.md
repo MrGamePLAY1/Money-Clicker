@@ -24,3 +24,13 @@ All notable changes to this project will be documented in this file.
   - Dynamic display of current bank balance.
   - Upgrade buttons appear only when affordable.
   - "Bank Balance" card with descriptive text.
+
+
+## [v0.1.1] - 26/01/2026
+
+### Added
+- **New Upgrades:**
+  - "Printer Upgrade" Upgrade (Increases CPS by +10 and Click Power by 0.1).
+
+- **Visual Effects:**
+  - Added visual images for printer upgrade.

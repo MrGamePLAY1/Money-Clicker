@@ -185,7 +185,20 @@ button {
   padding: 10px;
 }
 
- /* --------------------------------------- */
+/* --------------------------------------- */
+/* ---------------Printer Upgrade ----------*/
+#printer-upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #e6ffed;
+  box-shadow: 0 12px 30px rgba(52, 211, 76, 0.25);
+  display: none;
+  padding: 10px;
+}
+
 
 
 button:hover {
