@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
   - "Bank Balance" card with descriptive text.
 
 
-## [v0.1.1] - 27/01/2026
+## [v0.2.0] - 27/01/2026
 
 ### Added
 - **New Upgrades:**
