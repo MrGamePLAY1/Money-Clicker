@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
   - "Bank Balance" card with descriptive text.
 
 
-## [v0.1.1] - 26/01/2026
+## [v0.1.1] - 27/01/2026
 
 ### Added
 - **New Upgrades:**
@@ -34,3 +34,4 @@ All notable changes to this project will be documented in this file.
 
 - **Visual Effects:**
   - Added visual images for printer upgrade.
+  - Added visual affects for print money click 

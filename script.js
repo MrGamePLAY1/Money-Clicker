@@ -33,6 +33,21 @@ const loadSaveBtn = document.getElementById('load-save-btn');
 const alertBox = document.getElementById('alert');
 const clickSound = new Audio('sounds/$$.mp3');
 const printerUpgradeBtn = document.getElementById('printer-upgrade');
+const coinDiv = document.getElementById('coin-container');
+
+// Make it rain 
+function rain() {
+  for(let i=0; i<30; i++) {
+    setTimeout(() => {
+      const coin = document.createElement('div');
+      coin.className = 'coin';
+      coin.style.left = Math.random() * 100 + 'vw';
+      coin.style.animationDuration = (Math.random() * 1 + 1) + 's';
+      document.getElementById('coin-container').appendChild(coin);
+      setTimeout(() => coin.remove(), 2000);
+    }, i * 50);
+  }
+}
 
 // Message showing loaded save
 function displayLoadSaveMessage() {
@@ -113,6 +128,7 @@ loadSaveBtn.addEventListener('click', loadGame);
 clickBtn.addEventListener('click', () => {
     money += clickPower;
     moneyDisplay.innerText = money.toLocaleString();
+    rain();
 });
 
 // transform the money image when clicked
