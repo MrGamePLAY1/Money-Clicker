@@ -227,6 +227,7 @@ function updateUI() {
   cpsUpgradeCostSpan.textContent = clickerupgradeCost.toFixed(2);
   fastClickerUpgradeCostSpan.textContent = fastClickerUpgradeCost.toFixed(2);
   printerUpgradeCostSpan.textContent = printerUpgradeCost.toFixed(2);
+  grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toFixed(2);
 
   // Unlock auto clicker
   if (money >= clickerupgradeCost) {

@@ -210,6 +210,10 @@ button {
   padding: 10px;
 }
 
+#fast-clicker-upgrade:active {
+  transform: translateY(1px) scale(0.99);
+}
+
 /* --------------------------------------- */
 /* ---------------Printer Upgrade ----------*/
 #printer-upgrade {
@@ -224,7 +228,27 @@ button {
   padding: 10px;
 }
 
+#printer-upgrade:active {
+  transform: translateY(1px) scale(0.99);
+}
+/* --------------------------------------- */
+/* ---------------Granny Upgrade ----------*/
+#granny-upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  background: linear-gradient(135deg, #db2777, #be185d);
+  color: #ffe6f0;
+  box-shadow: 0 12px 30px rgba(219, 39, 119, 0.25);
+  display: none;
+  padding: 10px;
+}
 
+#granny-upgrade:active {
+  transform: translateY(1px) scale(0.99);
+}
+/* --------------------------------------------- */
 
 button:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
