@@ -298,6 +298,41 @@ button:hover {
   font-weight: 700;
 }
 
+/* Disabled State for Upgrades */
+.upgrade.disabled {
+  opacity: 0.6;
+  filter: grayscale(1);
+  cursor: not-allowed;
+  box-shadow: none;
+  background: var(--card-border); /* concise fallback or keep gradient but dim */
+}
+.upgrade.disabled:active {
+  transform: none;
+}
+
+/* Floating Text */
+.floating-text {
+  position: absolute;
+  color: var(--accent-strong);
+  font-weight: bold;
+  font-size: 1.2rem;
+  pointer-events: none;
+  user-select: none;
+  animation: floatUp 1s ease-out forwards;
+  z-index: 100;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.2);
+  }
+}
+
 /* Footer Styling */
 footer {
     background: var(--card); 

@@ -131,11 +131,26 @@ saveBtn.addEventListener('click', saveGame);
 loadSaveBtn.addEventListener('click', loadGame);
 
 // Logic
-clickBtn.addEventListener('click', () => {
+clickBtn.addEventListener('click', (e) => {
     money += clickPower;
     moneyDisplay.innerText = money.toLocaleString();
     rain();
+    createFloatingText(e.clientX, e.clientY, `+$${clickPower.toFixed(2)}`);
 });
+
+function createFloatingText(x, y, text) {
+    const el = document.createElement('div');
+    el.className = 'floating-text';
+    el.innerText = text;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    document.body.appendChild(el);
+    
+    // Remove after animation
+    setTimeout(() => {
+        el.remove();
+    }, 1000); // Matches CSS animation duration
+}
 
 // transform the money image when clicked
 clickBtn.addEventListener('click', () => {
@@ -229,25 +244,28 @@ function updateUI() {
   printerUpgradeCostSpan.textContent = printerUpgradeCost.toFixed(2);
   grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toFixed(2);
 
-  // Unlock auto clicker
-  if (money >= clickerupgradeCost) {
-    cpsUpgradeBtn.style.display = 'flex';
-  }
-
-  // Unlock fast clicker
-    if (money >= fastClickerUpgradeCost) {
-      fastClickerUpgradeBtn.style.display = 'flex';
+  // Helper to manage visibility and state
+  const manageUpgradeBtn = (btn, cost, baseCost) => {
+    // Reveal if we can afford it, OR if we have already bought it (cost increased)
+    // OR if it is already visible (don't hide it again)
+    if (money >= cost || cost > baseCost || btn.style.display === 'flex') {
+        btn.style.display = 'flex';
     }
 
-    // Unlock printer upgrade
-    if (money >= printerUpgradeCost) {
-      printerUpgradeBtn.style.display = 'flex';
+    // Toggle disabled class
+    if (money < cost) {
+        btn.classList.add('disabled');
+        btn.disabled = true;
+    } else {
+        btn.classList.remove('disabled');
+        btn.disabled = false;
     }
+  };
 
-    // Unlock granny upgrade
-    if (money >= grannyUpgradeCost) {
-      grannyUpgradeBtn.style.display = 'flex';
-    }
+  manageUpgradeBtn(cpsUpgradeBtn, clickerupgradeCost, 0.1);
+  manageUpgradeBtn(fastClickerUpgradeBtn, fastClickerUpgradeCost, 1);
+  manageUpgradeBtn(printerUpgradeBtn, printerUpgradeCost, 15);
+  manageUpgradeBtn(grannyUpgradeBtn, grannyUpgradeCost, 100);
 }
 
 // Populate UI on load
