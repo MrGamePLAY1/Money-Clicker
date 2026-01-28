@@ -48,4 +48,9 @@ All notable changes to this project will be documented in this file.
 - **UI Improvements:**
    - Added UI increase counter for 'Print Money'.
    - Added Grey Out affect for when upgrade is not affordable. 
+  
+- **Optimisations:**
+    - Optimisation for images.
+    - Optimisation for CSS, JS, Google Fonts.
+
 
