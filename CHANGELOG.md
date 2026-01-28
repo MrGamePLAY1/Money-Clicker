@@ -72,4 +72,5 @@ PATCH version when you make backward compatible bug fixes
   - Made the button upgrade click movements more exaggerated. 
   - Resized the total size of dollar.png.
   - Fixed a bug where 'Fast Auto Clicker Upgrade' was displaying incorrect CPS and click power.
+  - Fixed incorrect title for game.
 
