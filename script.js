@@ -17,17 +17,23 @@ let cps_display = 0; // clicks per second (Display)
 let clickerupgradeCost = 0.1;
 let fastClickerUpgradeCost = 1;
 let printerUpgradeCost = 15;
+let grannyUpgradeCost = 100;
 
 
 // Elements
 const moneyDisplay = document.getElementById('money-display');
 const clickBtn = document.getElementById('click-btn');
 const cpsUpgradeCostSpan = document.getElementById('cps-upgrade-cost');
+// Upgrades
 const cpsUpgradeBtn = document.getElementById('cps-upgrade');
 const fastClickerUpgradeBtn = document.getElementById('fast-clicker-upgrade');
 const fastClickerUpgradeCostSpan = document.getElementById('fast-clicker-upgrade-cost');
 const printerUpgradeCostSpan = document.getElementById('printer-upgrade-cost');
 const cpsDisplay = document.getElementById('cps-display');
+const grannyUpgradeBtn = document.getElementById('granny-upgrade');
+const grannyUpgradeCostSpan = document.getElementById('granny-upgrade-cost');
+
+
 const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
 const alertBox = document.getElementById('alert');
@@ -187,6 +193,21 @@ printerUpgradeBtn.addEventListener('click', () => {
     }
   );
 
+// Granny Upgrade Logic
+grannyUpgradeBtn.addEventListener('click', () => {
+    if (money >= grannyUpgradeCost) {
+        money -= grannyUpgradeCost;
+        cps += 50; // Increase CPS by 50
+        clickPower += 0.5; // Increase click power
+        moneyDisplay.innerText = money.toLocaleString();
+        grannyUpgradeCost *= 1.3; // Increase cost
+        // Update CPS display
+        cpsDisplay.textContent = cps_display += 50;
+        updateUI();
+      }
+    }
+  );
+
 // Auto income
 setInterval(() => {
   money += cps * 0.01;
@@ -220,6 +241,11 @@ function updateUI() {
     // Unlock printer upgrade
     if (money >= printerUpgradeCost) {
       printerUpgradeBtn.style.display = 'flex';
+    }
+
+    // Unlock granny upgrade
+    if (money >= grannyUpgradeCost) {
+      grannyUpgradeBtn.style.display = 'flex';
     }
 }
 
