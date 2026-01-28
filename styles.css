@@ -177,12 +177,26 @@ button {
    but layout is now handled by .upgrade class */
 
 /* Base upgrade class handles all layout */
-#cps-upgrade, 
-#fast-clicker-upgrade, 
-#printer-upgrade, 
-#granny-upgrade {
-   /* No specific layout rules here to avoid conflicts */
+#cps-upgrade {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
+
+#fast-clicker-upgrade {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+#printer-upgrade {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+#granny-upgrade {
+    background: linear-gradient(135deg, #db2777, #be185d);
+    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+}
+
 
 /* --------------------------------------------- */
 
