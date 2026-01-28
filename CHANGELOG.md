@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
   - Added visual images for printer upgrade.
   - Added visual affects for print money click. 
 
+
 ## [v0.3.0] - 29/01/2026
 - **New Upgrades:**
   - "Grannys wet mattress" Upgrade (Increases CPS by +50 and Click Power by 0.5).
@@ -43,4 +44,8 @@ All notable changes to this project will be documented in this file.
 - **Visual Effects:**
   - Added Visual for Grannys Wet Mattress.
   - Added motion for button clicks on upgrades.
+  
+- **UI Improvements:**
+   - Added UI increase counter for 'Print Money'.
+   - Added Grey Out affect for when upgrade is not affordable. 
 
