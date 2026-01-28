@@ -183,8 +183,8 @@ cpsUpgradeBtn.addEventListener('click', () => {
 fastClickerUpgradeBtn.addEventListener('click', () => {
     if (money >= fastClickerUpgradeCost) {
         money -= fastClickerUpgradeCost;
-        cps += 2; // Increase CPS by 2
-        clickPower += 0.02; // Increase click power
+        cps += 3; // Increase CPS by 2
+        clickPower += 0.03; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         fastClickerUpgradeCost *= 1.3; // Increase cost
         // Update CPS display
@@ -197,8 +197,8 @@ fastClickerUpgradeBtn.addEventListener('click', () => {
 printerUpgradeBtn.addEventListener('click', () => {
     if (money >= printerUpgradeCost) {
         money -= printerUpgradeCost;
-        cps += 10; // Increase CPS by 5
-        clickPower += 0.1; // Increase click power
+        cps += 10; // Increase CPS by 10
+        // clickPower += 0.1; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         printerUpgradeCost *= 1.3; // Increase cost
         // Update CPS display
@@ -213,7 +213,7 @@ grannyUpgradeBtn.addEventListener('click', () => {
     if (money >= grannyUpgradeCost) {
         money -= grannyUpgradeCost;
         cps += 50; // Increase CPS by 50
-        clickPower += 0.5; // Increase click power
+        // clickPower += 0.5; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         grannyUpgradeCost *= 1.3; // Increase cost
         // Update CPS display

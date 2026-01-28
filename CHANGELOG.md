@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [v0.1.0] - 25/01/2026
 
+<!-- 
+MAJOR version when you make incompatible API changes
+MINOR version when you add functionality in a backward compatible manner
+PATCH version when you make backward compatible bug fixes 
+-->
+
 ### Added
 - **New Upgrades:**
   - "Fast Auto Clicker" upgrade (Increases CPS by 2, Click Power by 0.02).
@@ -53,4 +59,17 @@ All notable changes to this project will be documented in this file.
     - Optimisation for images.
     - Optimisation for CSS, JS, Google Fonts.
 
+
+## [v0.4.1] - 31/01/2026
+- **New Upgrades:**
+  - Removed clickpower multiplers for all above 'Fast Auto Clicker' Upgrade.
+ 
+- **Visual Effects:**
+  - Replaced the standard click button with an interactive money icon.
+  - Upgraded the upgrade buttons with better layout and visuals.
+
+- **UI Improvements:**
+  - Made the button upgrade click movements more exaggerated. 
+  - Resized the total size of dollar.png.
+  - Fixed a bug where 'Fast Auto Clicker Upgrade' was displaying incorrect CPS and click power.
 

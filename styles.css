@@ -169,96 +169,27 @@ button {
   transform: translateY(1px) scale(0.99);
 }
 
-#click-btn {
-  width: 200px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #ffffff;
-  box-shadow: 0 12px 30px rgba(52, 211, 153, 0.25);
-}
 
 /* --------------CPS Upgrade ------------- */
 
-#cps-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #e8edf7;
-  box-shadow: 0 12px 30px rgba(52, 76, 211, 0.25);
-  cursor: url('images/cursor.png'), pointer;
-  display: none;
-  padding: 10px;
-}
 
-#click-btn:active,
-#cps-upgrade:active {
-  transform: translateY(1px) scale(0.99);
-}
+/* Upgrade Buttons - ID specific overrides for colors if needed, 
+   but layout is now handled by .upgrade class */
 
-/* --------------------------------------- */
-/* ---------------Super Clicker ----------*/
-#fast-clicker-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
-  color: #f3e8ff;
-  box-shadow: 0 12px 30px rgba(161, 52, 211, 0.25);
-  display: none;
-  padding: 10px;
-}
-
-#fast-clicker-upgrade:active {
-  transform: translateY(1px) scale(0.99);
-}
-
-/* --------------------------------------- */
-/* ---------------Printer Upgrade ----------*/
-#printer-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  color: #e6ffed;
-  box-shadow: 0 12px 30px rgba(52, 211, 76, 0.25);
-  display: none;
-  padding: 10px;
-}
-
-#printer-upgrade:active {
-  transform: translateY(1px) scale(0.99);
-}
-/* --------------------------------------- */
-/* ---------------Granny Upgrade ----------*/
+/* Base upgrade class handles all layout */
+#cps-upgrade, 
+#fast-clicker-upgrade, 
+#printer-upgrade, 
 #granny-upgrade {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
-  background: linear-gradient(135deg, #db2777, #be185d);
-  color: #ffe6f0;
-  box-shadow: 0 12px 30px rgba(219, 39, 119, 0.25);
-  display: none;
-  padding: 10px;
+   /* No specific layout rules here to avoid conflicts */
 }
 
-#granny-upgrade:active {
-  transform: translateY(1px) scale(0.99);
-}
 /* --------------------------------------------- */
 
-button:hover {
+#cps-upgrade:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
-.money-bag {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
-}
 
 @keyframes pop {
   0%   { transform: scale(1); }
@@ -284,30 +215,86 @@ button:hover {
   margin-top: 50px;
 }
 
+.upgrade {
+    display: flex; /* IMPORTANT */
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    background: linear-gradient(145deg, #2a2d3e, #1f222e); /* Modern dark card look */
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    color: white;
+    transition: transform 0.1s, border-color 0.2s;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.upgrade:hover {
+    transform: translateY(-2px);
+    border-color: #666;
+    background: linear-gradient(145deg, #32364a, #252936);
+}
+
+.upgrade:active {
+    transform: translateY(1px);
+}
+
+.icon-container img {
+    width: 40px;
+    /* height: 40px; */
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+}
+
+.upgrade-info {
+    flex-grow: 1; /* Pushes content to fill space */
+    display: flex;
+    flex-direction: column;
+    padding-right: 9px;
+    padding-left: 15px;
+}
+
 .upgrade-title {
-  font-weight: 700;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
 }
 
-.upgrade-desc {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-top: 0.1rem;
+.upgrade-power {
+    font-size: 0.85rem;
+    color: #4CAF50; /* Green for stat boost */
+    font-weight: 600;
 }
 
-.upgrade-right .cost {
-  font-weight: 700;
+.upgrade-cost-area {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    border: 1px solid #444;
 }
 
-/* Disabled State for Upgrades */
+.cost-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.cost-value {
+    font-weight: bold;
+    color: #ffcc00; /* Gold color for money */
+}
+
+/* Disabled State */
 .upgrade.disabled {
-  opacity: 0.6;
-  filter: grayscale(1);
-  cursor: not-allowed;
-  box-shadow: none;
-  background: var(--card-border); /* concise fallback or keep gradient but dim */
-}
-.upgrade.disabled:active {
-  transform: none;
+    opacity: 0.6;
+    filter: grayscale(0.8);
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* Floating Text */

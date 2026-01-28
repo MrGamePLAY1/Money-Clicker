@@ -33,11 +33,12 @@
             of exponential growth.
         </p>
 
-        <img id="dollar" src="images/dollar.png" alt="Money Bag" class="money-bag" width="50px" height="50px">
+    <button onclick="playClickSound()" id="click-btn" style="background: none; border: none; padding: 0; cursor: pointer;">
+        <img id="dollar" src="images/dollar.png" alt="Money Bag" class="money-bag" width="130px" height="130px">
+    </button>
 
         <h2 id="balance-container">$<span id="money-display">0</span></h2>
 
-        <button onclick="playClickSound()" id="click-btn">Print Money</button>
         <div class="meta">
             CPS: <span id="cps-display"></span>
         </div>
@@ -50,54 +51,78 @@
             <div class="upgrade-grid">
                 <!-- Updgrade 1     (Auto Clicker)------------------------ -->
                 <button id="cps-upgrade" class="upgrade hidden">
-                    <img src="images/basic.png" alt="Cursor" style="width: 34px; height: 34px; margin-right: 8px;">
-                    <div class="upgrade-left">
-                        <div class="upgrade-title">Auto Clicker</div>
-                        <div class="upgrade-desc">+1 per second</div>
+                    <!-- Icon Container -->
+                    <div class="icon-container">
+                        <img src="images/basic.png" alt="Cursor">
                     </div>
-                    <div class="upgrade-right"> <br>
-                        <span class="cost">Cost $<span id="cps-upgrade-cost"></span></span>
+
+                    <!-- Info Container -->
+                    <div class="upgrade-info">
+                        <span class="upgrade-title">Auto Clicker</span>
+                        <span class="upgrade-power">+1 CPS</span>
+                    </div>
+
+                    <!-- Cost Container (Looks like a price tag) -->
+                    <div class="upgrade-cost-area">
+                        <span class="cost-label">Buy</span>
+                        <span class="cost-value">$<span id="cps-upgrade-cost">0.20</span></span>
                     </div>
                 </button>
                 <!-- ---------------------------------------------------- -->
 
                 <!-- Upgrade 2 (fast Clicker) ------------------------------->
                 <button id="fast-clicker-upgrade" class="upgrade hidden">
-                    <img src="images/cursor.png" alt="Cursor" style="width: 38px; height: 38px; margin-right: 8px;">
-                    <div class="upgrade-left">
-                        <div class="upgrade-title">Fast Auto Clicker</div>
-                        <div class="upgrade-desc">+3 per second</div>
+                    <div class="icon-container">
+                         <img src="images/cursor.png" alt="Cursor">
                     </div>
-                    <div class="upgrade-right"> <br>
-                        <span class="cost">Cost $<span id="fast-clicker-upgrade-cost"></span></span>
+                    
+                    <div class="upgrade-info">
+                        <span class="upgrade-title">Fast Auto Clicker</span>
+                         <span class="upgrade-power">+3 CPS</span>
+                    </div>
+
+                    <div class="upgrade-cost-area">
+                        <span class="cost-label">Buy</span>
+                        <span class="cost-value">$<span id="fast-clicker-upgrade-cost"></span></span>
                     </div>
                 </button>
                 <!-- ---------------------------------------------------- -->
 
                 <!-- Upgrade 3 (Printer) ----------------------------------->
                 <button id="printer-upgrade" class="upgrade hidden">
-                    <img src="images/printer.png" alt="Printer" style="width: 34px; height: 34px; margin-right: 8px;">
-                    <div class="upgrade-left">
-                        <div class="upgrade-title">Money Printer</div>
-                        <div class="upgrade-desc">+10 per second</div>
+                    <div class="icon-container">
+                        <img src="images/printer.png" alt="Printer">
                     </div>
-                    <div class="upgrade-right"> <br>
-                        <span class="cost">Cost $<span id="printer-upgrade-cost"></span></span>
+
+                    <div class="upgrade-info">
+                        <span class="upgrade-title">Money Printer</span>
+                        <span class="upgrade-power">+10 CPS</span>
+                    </div>
+
+                    <div class="upgrade-cost-area">
+                        <span class="cost-label">Buy</span>
+                        <span class="cost-value">$<span id="printer-upgrade-cost"></span></span>
                     </div>
                 </button>
                 <!-- ---------------------------------------------------- -->
 
                 <!-- Upgrade 3 Grannys Wet Mattress ------------------------->
                 <button id="granny-upgrade" class="upgrade hidden">
-                    <img src="images/granny.png" alt="Granny's Mattress" style="width: 74px; height: 74px; margin-right: 8px;">
-                    <div class="upgrade-left">
-                        <div class="upgrade-title">Granny's Wet Mattress</div>
-                        <div class="upgrade-desc">+50 per second</div>
+                    <div class="icon-container">
+                        <img src="images/granny.png" height="74px" width="74px" alt="Granny's Mattress">
                     </div>
-                    <div class="upgrade-right"> <br>
-                        <span class="cost">Cost $<span id="granny-upgrade-cost"></span></span>
+
+                    <div class="upgrade-info">
+                        <span class="upgrade-title">Granny's Wet Mattress</span>
+                        <span class="upgrade-power">+50 CPS</span>
+                    </div>
+
+                    <div class="upgrade-cost-area">
+                        <span class="cost-label">Buy</span>
+                        <span class="cost-value">$<span id="granny-upgrade-cost"></span></span>
                     </div>
                 </button>
+
                 <!-- ---------------------------------------------------- -->
             </div>
         </div>
