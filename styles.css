@@ -38,12 +38,16 @@ body {
   padding: clamp(1rem, 3vw, 2.5rem);
 }
 
-/* p {
-  max-width: 520px;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+/* Styles for upgrade quantity  */
+#cps-upgrade-quantity, 
+#fast-upgrade-quantity, 
+#printer-upgrade-quantity, 
+#granny-upgrade-quantity {
+  font-size: 1rem;
   color: var(--muted);
-} */
+  margin-left: 0.5rem;
+}
+
 
 #coin-container { 
   position: fixed;

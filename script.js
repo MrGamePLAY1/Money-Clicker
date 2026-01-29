@@ -9,6 +9,12 @@ const log = {
 let money = 0;
 let clickPower = 0.01;
 
+// Purchase Count
+let buyCount = 0; // Number of CPS upgrades purchased
+let fastClickerCount = 0; // Number of Fast Auto Clicker upgrades purchased
+let printerCount = 0; // Number of Printer upgrades purchased
+let grannyCount = 0; // Number of Granny's Wet Mattress upgrades purchased
+
 // Updgrades
 let cps = 0; // clicks per second (Value)
 let cps_display = 0; // clicks per second (Display)
@@ -24,6 +30,12 @@ let grannyUpgradeCost = 100;
 const moneyDisplay = document.getElementById('money-display');
 const clickBtn = document.getElementById('click-btn');
 const cpsUpgradeCostSpan = document.getElementById('cps-upgrade-cost');
+const upgradeQuantitySpan = document.getElementById('cps-upgrade-quantity'); // Added for upgrade quantity
+const fastQuantitySpan = document.getElementById('fast-upgrade-quantity');
+const printerQuantitySpan = document.getElementById('printer-upgrade-quantity');
+const grannyQuantitySpan = document.getElementById('granny-upgrade-quantity');
+
+
 // Upgrades
 const cpsUpgradeBtn = document.getElementById('cps-upgrade');
 const fastClickerUpgradeBtn = document.getElementById('fast-clicker-upgrade');
@@ -165,16 +177,21 @@ clickBtn.addEventListener('click', () => {
     moneyBag.classList.add('pop');
 });
 
+
 // CPS Upgrade Logic
 cpsUpgradeBtn.addEventListener('click', () => {
     if (money >= clickerupgradeCost) {
         money -= clickerupgradeCost;
         cps += 1; // Increase CPS by 1
+        buyCount += 1; // Increment purchase count
         clickPower += 0.01; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         clickerupgradeCost *= 1.15; // Increase cost
-        // Update CPS display
+        
+        // Update displays
         cpsDisplay.textContent = cps_display += 1;
+        upgradeQuantitySpan.textContent = "x" + buyCount; // Update quantity display
+
         updateUI();
     }
 });
@@ -184,11 +201,15 @@ fastClickerUpgradeBtn.addEventListener('click', () => {
     if (money >= fastClickerUpgradeCost) {
         money -= fastClickerUpgradeCost;
         cps += 3; // Increase CPS by 2
+        fastClickerCount += 1; // Increment purchase count
         clickPower += 0.03; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         fastClickerUpgradeCost *= 1.3; // Increase cost
-        // Update CPS display
+        
+        // Update displays
         cpsDisplay.textContent = cps_display += 3;
+       fastQuantitySpan.textContent = "x" + fastClickerCount; // Update quantity display
+
         updateUI();
     }
 });
@@ -198,11 +219,15 @@ printerUpgradeBtn.addEventListener('click', () => {
     if (money >= printerUpgradeCost) {
         money -= printerUpgradeCost;
         cps += 10; // Increase CPS by 10
+        printerCount += 1; // Increment purchase count
         // clickPower += 0.1; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         printerUpgradeCost *= 1.3; // Increase cost
-        // Update CPS display
+
+        // Update displays
         cpsDisplay.textContent = cps_display += 10;
+        printerQuantitySpan.textContent = "x" + printerCount; // Update quantity display
+
         updateUI();
       }
     }
@@ -213,11 +238,15 @@ grannyUpgradeBtn.addEventListener('click', () => {
     if (money >= grannyUpgradeCost) {
         money -= grannyUpgradeCost;
         cps += 50; // Increase CPS by 50
+        grannyCount += 1; // Increment purchase count
         // clickPower += 0.5; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
         grannyUpgradeCost *= 1.3; // Increase cost
-        // Update CPS display
+
+        // Update displays
         cpsDisplay.textContent = cps_display += 50;
+        grannyQuantitySpan.textContent = "x" + grannyCount; // Update quantity display
+
         updateUI();
       }
     }
@@ -267,6 +296,7 @@ function updateUI() {
   manageUpgradeBtn(printerUpgradeBtn, printerUpgradeCost, 15);
   manageUpgradeBtn(grannyUpgradeBtn, grannyUpgradeCost, 100);
 }
+
 
 // Populate UI on load
 updateUI();

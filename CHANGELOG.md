@@ -67,6 +67,7 @@ PATCH version when you make backward compatible bug fixes
 - **Visual Effects:**
   - Replaced the standard click button with an interactive money icon.
   - Upgraded the upgrade buttons with better layout and visuals.
+  - Added quantity bought for upgrade
 
 - **UI Improvements:**
   - Made the button upgrade click movements more exaggerated. 
