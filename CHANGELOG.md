@@ -68,10 +68,14 @@ PATCH version when you make backward compatible bug fixes
   - Replaced the standard click button with an interactive money icon.
   - Upgraded the upgrade buttons with better layout and visuals.
   - Added quantity bought for upgrade
+  - Added favicon image
 
 - **UI Improvements:**
   - Made the button upgrade click movements more exaggerated. 
   - Resized the total size of dollar.png.
   - Fixed a bug where 'Fast Auto Clicker Upgrade' was displaying incorrect CPS and click power.
   - Fixed incorrect title for game.
+
+- **Optimisations:**
+  - Optimised styles for better page laoding.
 
