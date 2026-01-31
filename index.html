@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <link rel="preload" href="/styles.css" as="style">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="preload" href="sounds/$$.mp3" as="audio">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     
     <title>Money Clicker</title>
-    <link rel="icon" type="images/favicon.png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
 
     <!-- Coin falling -->
     <div id="coin-container"></div>
     <div class="game-card">
-        <button  onclick="displayMessage()" id="save-btn">Save</button>
+        <button id="save-btn">Save</button>
         <button id="load-save-btn">Load Save</button>
         <h1>Money Clicker</h1>
         
@@ -36,8 +38,8 @@
             of exponential growth.
         </p>
 
-    <button onclick="playClickSound()" id="click-btn" style="background: none; border: none; padding: 0; cursor: pointer;">
-        <img id="dollar" src="images/dollar.png" alt="Money Bag" class="money-bag" width="130px" height="130px">
+    <button id="click-btn">
+        <img id="dollar" src="images/dollar.png" alt="Money Bag" class="money-bag">
     </button>
 
         <h2 id="balance-container">$<span id="money-display">0</span></h2>

@@ -1,7 +1,9 @@
-// Creating the logger
+// Creating the logger - disabled in production
 const log = {
     log: (message) => {
-        console.log(`[${new Date().toLocaleTimeString()}] ${message}`); 
+        // Production: console logging disabled for security
+        // Uncomment below for development only:
+        // console.log(`[${new Date().toLocaleTimeString()}] ${message}`); 
     }
 };
 
@@ -137,15 +139,19 @@ function saveGame() {
 }
 
 // Save Button Logic
-saveBtn.addEventListener('click', saveGame);
+saveBtn.addEventListener('click', () => {
+    saveGame();
+    displayMessage();
+});
 
 // Load Save Button Logic
 loadSaveBtn.addEventListener('click', loadGame);
 
-// Logic
+// Click Button - Play Sound
 clickBtn.addEventListener('click', (e) => {
     money += clickPower;
     moneyDisplay.innerText = money.toLocaleString();
+    playClickSound(); // Play sound on click
     rain();
     createFloatingText(e.clientX, e.clientY, `+$${clickPower.toFixed(2)}`);
 });

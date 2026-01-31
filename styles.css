@@ -122,14 +122,35 @@ body {
 
 button {
   padding: var(--btn-pad-y) var(--btn-pad-x);
-  font-size: var(--btn-font);
   border: 1px solid var(--card-border);
   border-radius: 0.85rem;
   cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.2s ease;
-  width: 100%;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+}
+
+/* Click button - money icon button */
+#click-btn {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  margin: 0;
+  box-shadow: none !important;
+  display: inline-block;
+}
+
+#click-btn:hover,
+#click-btn:active,
+#click-btn:focus {
+  background: none !important;
+  border: none !important;
+  outline: none;
+  box-shadow: none !important;
+}
+
+#click-btn img {
+  width: 130px;
+  height: 130px;
+  display: block;
 }
 
 /* load save button */
