@@ -77,5 +77,5 @@ PATCH version when you make backward compatible bug fixes
   - Fixed incorrect title for game.
 
 - **Optimisations:**
-  - Optimised styles for better page laoding.
+  - Optimised styles for better page loading.
 
