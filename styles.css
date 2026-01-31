@@ -345,7 +345,7 @@ footer {
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
     padding: 1.5rem;
-    width: min(90vw, 360px); /* Smaller box width */
+    width: 40% ; /* Smaller box width */
     box-shadow: var(--shadow);
     
     color: var(--muted);
@@ -355,7 +355,14 @@ footer {
 }
 
 /* Remove margin-top as body gap handles it */
-/* #game-footer { ... } removed as it was unused/duplicate */
+#game-footer { 
+    margin-top: 0;
+}
+
+footer li {
+    margin-bottom: 0.4rem;
+    text-align: center;
+}
 
 footer h5 {
     margin: 0 0 0.5rem 0;
