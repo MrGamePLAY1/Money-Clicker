@@ -10,12 +10,14 @@ const log = {
 // Game State
 let money = 0;
 let clickPower = 0.01;
+let last_known_click_time = 0;
 
 // Purchase Count
 let buyCount = 0; // Number of CPS upgrades purchased
 let fastClickerCount = 0; // Number of Fast Auto Clicker upgrades purchased
 let printerCount = 0; // Number of Printer upgrades purchased
 let grannyCount = 0; // Number of Granny's Wet Mattress upgrades purchased
+let farmCount = 0; // Number of Farm upgrades purchased
 
 // Updgrades
 let cps = 0; // clicks per second (Value)
@@ -26,6 +28,7 @@ let clickerupgradeCost = 0.1;
 let fastClickerUpgradeCost = 1;
 let printerUpgradeCost = 15;
 let grannyUpgradeCost = 100;
+let farmUpgradeCost = 300;
 
 
 // Elements
@@ -36,6 +39,10 @@ const upgradeQuantitySpan = document.getElementById('cps-upgrade-quantity'); // 
 const fastQuantitySpan = document.getElementById('fast-upgrade-quantity');
 const printerQuantitySpan = document.getElementById('printer-upgrade-quantity');
 const grannyQuantitySpan = document.getElementById('granny-upgrade-quantity');
+const farmQuantitySpan = document.getElementById('farm-upgrade-quantity');
+
+// Hidden Upgrade Button
+const revealUpgradeBtn = document.getElementById('reveal-upgrade-btn');
 
 
 // Upgrades
@@ -46,14 +53,77 @@ const printerUpgradeCostSpan = document.getElementById('printer-upgrade-cost');
 const cpsDisplay = document.getElementById('cps-display');
 const grannyUpgradeBtn = document.getElementById('granny-upgrade');
 const grannyUpgradeCostSpan = document.getElementById('granny-upgrade-cost');
+const farmUpgradeBtn = document.getElementById('farm-upgrade');
+const farmUpgradeCostSpan = document.getElementById('farm-upgrade-cost');
+
 
 
 const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
 const alertBox = document.getElementById('alert');
+const autosaveAlertBox = document.getElementById('autosave-alert');
 const clickSound = new Audio('sounds/$$.mp3');
 const printerUpgradeBtn = document.getElementById('printer-upgrade');
 const coinDiv = document.getElementById('coin-container');
+
+// Show the next hidden upgrade
+function revealNextUpgrade() {
+
+}
+
+// upgrades
+const upgrades = [
+  {
+    element: cpsUpgradeBtn,
+    revealCondition: () => money >= 0.1,
+    revleaved: false
+  },
+  {
+    element: fastClickerUpgradeBtn,
+    revealCondition: () => money >= 1,
+    revleaved: false
+  },
+  {
+    element: printerUpgradeBtn,
+    revealCondition: () => money >= 15,
+    revleaved: false 
+  },
+  {
+    element: grannyUpgradeBtn,
+    revealCondition: () => money >= 100,
+    revleaved: false
+  }
+];  
+
+function checkAndRevealUpgrades() {
+    let nextUpgradeFound = false;
+
+    // First, fully reveal any upgrades that meet their conditions
+    for (const upgrade of upgrades) {
+        if (upgrade.revealed) continue; // Skip if already revealed
+
+        if (upgrade.revealCondition()) {
+            upgrade.element.classList.remove('hidden', 'locked'); // Make it fully visible
+            upgrade.revealed = true;
+        }
+    }
+
+    // Now, find the *next* un-revealed upgrade and show it as locked
+    for (const upgrade of upgrades) {
+        if (!upgrade.revealed) {
+            if (!nextUpgradeFound) {
+                // This is the next upgrade to be unlocked
+                upgrade.element.classList.remove('hidden');
+                upgrade.element.classList.add('locked');
+                nextUpgradeFound = true;
+            } else {
+                // Any subsequent upgrades should remain completely hidden
+                upgrade.element.classList.add('hidden');
+                upgrade.element.classList.remove('locked');
+            }
+        }
+    }
+}
 
 // Make it rain 
 function rain() {
@@ -100,7 +170,10 @@ function autoSave() {
   };
   localStorage.setItem('moneyClickerSave', JSON.stringify(autoSave));
   sessionStorage.setItem('moneyClickerSave', JSON.stringify(autoSave));
-  log.log('Auto Saved Game: $' + money.toFixed(2));
+    autosaveAlertBox.classList.remove('hidden');
+      setTimeout(() => {
+      autosaveAlertBox.classList.add('hidden');
+    }, 3000);
   }
 
 // Load Save function
@@ -172,6 +245,9 @@ function createFloatingText(x, y, text) {
 
 // transform the money image when clicked
 clickBtn.addEventListener('click', () => {
+  // Getting the timestamp in which the click was made
+    last_known_click_time = Date.now();
+    
     const moneyBag = document.querySelector('#dollar');
     // Remove animation so it can restart
     moneyBag.classList.remove('pop');
@@ -258,19 +334,57 @@ grannyUpgradeBtn.addEventListener('click', () => {
     }
   );
 
+// Farm Upgrade Logic
+farmUpgradeBtn.addEventListener('click', () => {
+    if (money >= farmUpgradeCost) {
+        money -= farmUpgradeCost;
+        cps += 100; // Increase CPS by 50
+        farmCount += 1; // Increment purchase count
+        // clickPower += 0.5; // Increase click power
+        moneyDisplay.innerText = money.toLocaleString();
+        farmUpgradeCost *= 1.3; // Increase cost
+
+        // Update displays
+        cpsDisplay.textContent = cps_display += 100;
+        farmQuantitySpan.textContent = "x" + farmCount; // Update quantity display
+        updateUI();
+      }
+    }
+  );
+
+// Re-work for money increase using time
+function gameRun() {
+  money += (Date.now())
+}
+
 // Auto income
 setInterval(() => {
-  money += cps * 0.01;
+  // money += cps * 0.01;
   updateUI();
 }, 1000);
 
 setInterval(function() {
   autoSave();
-}, 120000); // 120,000 milliseconds = 2 minutes
+}, 60000); // 60,000 milliseconds = 1 minute
 
 
 // Functions
 function updateUI() {
+  checkAndRevealUpgrades();
+
+  const now = Date.now();
+  const deltaTime = (now - last_known_click_time) / 1000; // in seconds
+  last_known_click_time = now;
+
+  // increease based on time passed
+  const new_cps = cps/100; // Adjusted for smoother income
+  const moneyEarned = new_cps * deltaTime;
+  money += moneyEarned;
+
+  // Getting the current cps
+  cpsDisplay.textContent = cps_display.toFixed(2); 
+
+
   moneyDisplay.textContent = money.toFixed(2);
 
   // Show current auto-clicker cost
@@ -278,6 +392,7 @@ function updateUI() {
   fastClickerUpgradeCostSpan.textContent = fastClickerUpgradeCost.toFixed(2);
   printerUpgradeCostSpan.textContent = printerUpgradeCost.toFixed(2);
   grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toFixed(2);
+  farmUpgradeCostSpan.textContent = farmUpgradeCost.toFixed(2);
 
   // Helper to manage visibility and state
   const manageUpgradeBtn = (btn, cost, baseCost) => {
@@ -301,8 +416,5 @@ function updateUI() {
   manageUpgradeBtn(fastClickerUpgradeBtn, fastClickerUpgradeCost, 1);
   manageUpgradeBtn(printerUpgradeBtn, printerUpgradeCost, 15);
   manageUpgradeBtn(grannyUpgradeBtn, grannyUpgradeCost, 100);
+  manageUpgradeBtn(farmUpgradeBtn, farmUpgradeCost, 300);
 }
-
-
-// Populate UI on load
-updateUI();

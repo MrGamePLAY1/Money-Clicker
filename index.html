@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://img.buymeacoffee.com; media-src 'self'">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+
     
     <title>Money Clicker</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -27,9 +28,14 @@
         <h1>Money Clicker</h1>
         
 
-<div id="alert" class="alert hidden">
-  Game Loaded Successfully!
-</div>
+    <div id="alert" class="alert hidden">
+    Game Loaded Successfully!
+    </div>
+
+    <div id="autosave-alert" class="alert hidden">
+    Game Auto-Saved!
+    </div>
+
         
         <p id="about">Welcome to Money Clicker! Money Clicker is a moderate-paced incremental game 
             where players start with nothing and build a financial empire one tap at a time.
@@ -54,34 +60,28 @@
             </div>
 
             <div class="upgrade-grid">
-                <!-- Updgrade 1     (Auto Clicker)------------------------ -->
+
                 <button id="cps-upgrade" class="upgrade hidden">
-                    <!-- Icon Container -->
                     <div class="icon-container">
                         <img src="images/basic.png" alt="Cursor">
                     </div>
 
-                    <!-- Info Container -->
                     <div class="upgrade-info">
                         <span class="upgrade-title">Auto Clicker</span>
                         <span class="upgrade-power">+1 CPS</span>
                     </div>
 
-                    <!-- Cost Container (Looks like a price tag) -->
                     <div class="upgrade-cost-area">
                         <span class="cost-label">Buy</span>
                         <span class="cost-value">$<span id="cps-upgrade-cost">0.20</span></span>
                     </div>
-
 
                     <div class="upgrade-quantity">
                         <span id="cps-upgrade-quantity">x0</span>
                     </div>
 
                 </button>
-                <!-- ---------------------------------------------------- -->
 
-                <!-- Upgrade 2 (fast Clicker) ------------------------------->
                 <button id="fast-clicker-upgrade" class="upgrade hidden">
                     <div class="icon-container">
                          <img src="images/cursor.png" alt="Cursor">
@@ -102,9 +102,7 @@
                         <span id="fast-upgrade-quantity">x0</span>
                     </div>
                 </button>
-                <!-- ---------------------------------------------------- -->
 
-                <!-- Upgrade 3 (Printer) ----------------------------------->
                 <button id="printer-upgrade" class="upgrade hidden">
                     <div class="icon-container">
                         <img src="images/printer.png" alt="Printer">
@@ -125,12 +123,10 @@
                         <span id="printer-upgrade-quantity">x0</span>
                     </div>
                 </button>
-                <!-- ---------------------------------------------------- -->
 
-                <!-- Upgrade 3 Grannys Wet Mattress ------------------------->
                 <button id="granny-upgrade" class="upgrade hidden">
                     <div class="icon-container">
-                        <img src="images/granny.png" height="74px" width="74px" alt="Granny's Mattress">
+                        <img src="images/granny.png" height="90px" alt="Granny's Mattress">
                     </div>
 
                     <div class="upgrade-info">
@@ -149,25 +145,45 @@
                     </div>
                 </button>
 
-                <!-- ---------------------------------------------------- -->
+                <button id="farm-upgrade" class="upgrade hidden">
+                    <div class="icon-container">
+                        <img src="images/money-farm.png" alt="farm">
+                    </div>
+
+                    <div class="upgrade-info">
+                        <span class="upgrade-title">Money Farm</span>
+                        <span class="upgrade-power">+100 CPS</span>
+                    </div>
+
+                    <div class="upgrade-cost-area">
+                        <span class="cost-label">Buy</span>
+                        <span class="cost-value">$<span id="farm-upgrade-cost"></span></span>
+                    </div>
+
+
+                    <div class="upgrade-quantity">
+                        <span id="farm-upgrade-quantity">x0</span>
+                    </div>
+                </button>
             </div>
         </div>
     </div>
 
+
     <footer class="game-footer">
-        <h5>What's New (v0.4.1)</h5>
-        <h3>31/01/2026</h3>
+        <h5>What's New (v0.5.2)</h5>
+        <h3>06/01/2026</h3>
         <ul id="change-log">
-            <li>* New interactive money icon replaces the standard click button</li>
-            <li>* Improved upgrade visuals with a cleaner layout and clearer quantity tracking</li>
-            <li>* Gameplay balancing update: click power multipliers removed for higher auto-clicker upgrades</li>
-            <li>* Smoother, more satisfying animations when interacting with upgrades</li>
-            <li>* Bug fixes for incorrect CPS values and game title</li>
-            <li>* Performance improvements for faster page loading</li>
-            <li>* New favicon added for better branding</li>
+           <li>General bug fixes check changelog.</li>
+           <li>Improved performance and stability.</li>
+           <li>Added next upgrade preview.</li>
+           <li>Created starter achievements</li>
         </ul>
+
+        
         <p><a href="https://github.com/MrGamePLAY1/Money-Clicker/blob/main/CHANGELOG.md" target="_blank">View Full Changelog</a></p>
         <p style="margin-top: 1rem; opacity: 0.6;">Created by MrGamePLAY1</p>
+        <a href="https://buymeacoffee.com/mrgameplay"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=mrgameplay&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
     </footer>
 
     

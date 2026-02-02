@@ -79,3 +79,22 @@ PATCH version when you make backward compatible bug fixes
 - **Optimisations:**
   - Optimised styles for better page loading.
 
+
+## [v0.5.2] - 06/02/2026
+- **Fixes:**
+   - Fixed an issue where Buy Me a Coffee did not link correctly.
+
+- **UI Improvements:**
+  - Made the UI more stable when currency is increased.
+
+- **New Upgrades:**
+   - Added first set of Acheivements.
+   - Added new upgrades 'Farm', 'Investment Bank'.
+   - Added sporadic random piggy bank.
+
+- **Optimisations:**
+  - Re-worked logic behind money gathering (based on time).
+
+- **Visual Effects:**
+  - Added next upgrade preview.
+  - Added sporadic random piggy bank event.

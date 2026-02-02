@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# But don't ignore these files/directories
+!index.html
+!sounds/
+!images/
+!script.min.js
+!.gitignore
+!*/
