@@ -5,6 +5,7 @@
 !index.html
 !sounds/
 !images/
+!images/*
 !script.min.js
 !.gitignore
 !*/
