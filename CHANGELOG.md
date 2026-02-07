@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v0.1.0] - 25/01/2026
+## 
+[v0.1.0] - 25/01/2026
 
 <!-- 
 MAJOR version when you make incompatible API changes
@@ -32,7 +33,8 @@ PATCH version when you make backward compatible bug fixes
   - "Bank Balance" card with descriptive text.
 
 
-## [v0.2.0] - 27/01/2026
+## 
+[v0.2.0] - 27/01/2026
 
 ### Added
 - **New Upgrades:**
@@ -43,7 +45,8 @@ PATCH version when you make backward compatible bug fixes
   - Added visual affects for print money click. 
 
 
-## [v0.3.0] - 29/01/2026
+## 
+[v0.3.0] - 29/01/2026
 - **New Upgrades:**
   - "Grannys wet mattress" Upgrade (Increases CPS by +50 and Click Power by 0.5).
 
@@ -60,7 +63,8 @@ PATCH version when you make backward compatible bug fixes
     - Optimisation for CSS, JS, Google Fonts.
 
 
-## [v0.4.1] - 31/01/2026
+## 
+[v0.4.1] - 31/01/2026
 - **New Upgrades:**
   - Removed clickpower multiplers for all above 'Fast Auto Clicker' Upgrade.
  
@@ -80,7 +84,8 @@ PATCH version when you make backward compatible bug fixes
   - Optimised styles for better page loading.
 
 
-## [v0.5.2] - 06/02/2026
+## 
+[v0.5.2] - 06/02/2026
 - **Fixes:**
    - Fixed an issue where Buy Me a Coffee did not link correctly.
 
@@ -100,7 +105,8 @@ PATCH version when you make backward compatible bug fixes
   - Added sporadic random piggy bank event.
 
 
-## [v0.5.3] - 07/02/2026
+## 
+[v0.5.3] - 07/02/2026
 - **Fixes:**
   - Added \<br> tag to about section to break up content better.
   - Replaced footer position.
