@@ -102,7 +102,7 @@ PATCH version when you make backward compatible bug fixes
 
 ## [v0.5.3] - 07/02/2026
 - **Fixes:**
-  - Added \<br>\ tag to about section to break up content better.
+  - Added \<br> tag to about section to break up content better.
   - Replaced footer position.
   - Fixed a bug where farm upgrade was not showing as next upgrade to be unlocked.
   - Fixed a bug where quantity count was not being added to save data.
