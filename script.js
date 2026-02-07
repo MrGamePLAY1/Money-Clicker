@@ -1,4 +1,6 @@
-// Creating the logger - disabled in production
+// Versioning:: MAJOR.MINOR.PATCH
+
+
 const log = {
     log: (message) => {
         // Production: console logging disabled for security
@@ -11,6 +13,7 @@ const log = {
 let money = 0;
 let clickPower = 0.01;
 let last_known_click_time = 0;
+let totalClicks = 0; // Total number of clicks made by the player
 
 // Purchase Count
 let buyCount = 0; // Number of CPS upgrades purchased
@@ -29,6 +32,9 @@ let fastClickerUpgradeCost = 1;
 let printerUpgradeCost = 15;
 let grannyUpgradeCost = 100;
 let farmUpgradeCost = 300;
+
+// quantity of upgrades purchased
+
 
 
 // Elements
@@ -58,7 +64,6 @@ const farmUpgradeCostSpan = document.getElementById('farm-upgrade-cost');
 
 
 
-const saveBtn = document.getElementById('save-btn');
 const loadSaveBtn = document.getElementById('load-save-btn');
 const alertBox = document.getElementById('alert');
 const autosaveAlertBox = document.getElementById('autosave-alert');
@@ -66,9 +71,68 @@ const clickSound = new Audio('sounds/$$.mp3');
 const printerUpgradeBtn = document.getElementById('printer-upgrade');
 const coinDiv = document.getElementById('coin-container');
 
-// Show the next hidden upgrade
-function revealNextUpgrade() {
+// Load Save Button Logic
+loadSaveBtn.addEventListener('click', loadGame);
 
+// Achievements
+const achievements = {
+  'first_click': {
+    name: 'First Click',
+    description: 'Make your first click.',
+    unlocked: false,
+    condition: () => money >= 0.01
+  },
+  'first_dollar': {
+    name: 'First Dollar',
+    description: 'Earn your first dollar.',
+    unlocked: false,
+    condition: () => money >= 1
+  }
+}
+
+// function to initialize achievements
+function initializeAchievements() {
+  const grid = document.getElementById('achievements-grid');
+  // clear the grid
+  grid.innerHTML = '';
+
+  // create achievement elements
+  for (const key in achievements) {
+    const achievement = achievements[key];
+    const el = document.createElement('div');
+    el.key = 'achievement-' + key;
+    el.classList.add('achievement');
+    if (achievement.unlocked) {
+      el.classList.add('unlocked');
+    }
+
+    el.innerHTML = `
+      <div class="achievement-title">${achievement.name}</div>
+      <div class="achievement-description">${achievement.description}</div>
+    `;
+    grid.appendChild(el);
+  }
+}
+
+// Function to unlock the achievement
+function unlockAchievement(key) {
+  if (achievements[key] && !achievements[key].unlocked) {
+    achievements[key].unlocked = true;
+
+    document.getElementById('achievement-' + key).classList.add('unlocked');
+    // Show achievement unlocked message
+    alert(`Achievement Unlocked: ${achievements[key].name}`);
+  }
+}
+
+// Function to check all achievement conditions
+function checkAchievements() {
+  if (totalClicks >= 1) {
+    unlockAchievement('first_click');
+  }
+  if (money >= 1) {
+    unlockAchievement('first_dollar');
+  }
 }
 
 // upgrades
@@ -91,6 +155,11 @@ const upgrades = [
   {
     element: grannyUpgradeBtn,
     revealCondition: () => money >= 100,
+    revleaved: false
+  },
+  {
+    element: farmUpgradeBtn,
+    revealCondition: () => money >= 300,
     revleaved: false
   }
 ];  
@@ -139,6 +208,33 @@ function rain() {
   }
 }
 
+// Load Save function
+function loadGame() {
+  const savedData = sessionStorage.getItem('moneyClickerSave') || localStorage.getItem('moneyClickerSave');
+  if (savedData) {
+    const gameSaveData = JSON.parse(savedData);
+    money = gameSaveData.money;
+    clickPower = gameSaveData.clickPower;
+    cps = gameSaveData.cps;
+    cps_display = gameSaveData.cps_display;
+    clickerupgradeCost = gameSaveData.clickerupgradeCost;
+    fastClickerUpgradeCost = gameSaveData.fastClickerUpgradeCost;
+    // todo: add quantity of upgrades purchased to save data
+    buyCount = gameSaveData.buyCount || 0;
+    fastClickerCount = gameSaveData.fastClickerCount || 0;
+    printerCount = gameSaveData.printerCount || 0;
+    grannyCount = gameSaveData.grannyCount || 0;
+    farmCount = gameSaveData.farmCount || 0;
+
+
+    updateUI();
+    log.log('Game Loaded: $' + money.toFixed(2));
+    displayLoadSaveMessage();
+  } else {
+    log.log('No save data found.');
+  }
+}
+
 // Message showing loaded save
 function displayLoadSaveMessage() {
   alertBox.classList.remove('hidden');
@@ -166,7 +262,15 @@ function autoSave() {
     cps: cps,
     cps_display: cps_display,
     clickerupgradeCost: clickerupgradeCost,
-    fastClickerUpgradeCost: fastClickerUpgradeCost
+    fastClickerUpgradeCost: fastClickerUpgradeCost,
+    printerUpgradeCost: printerUpgradeCost,
+    grannyUpgradeCost: grannyUpgradeCost,
+    farmUpgradeCost: farmUpgradeCost,
+    buyCount: buyCount,
+    fastClickerCount: fastClickerCount,
+    printerCount: printerCount,
+    grannyCount: grannyCount,
+    farmCount: farmCount
   };
   localStorage.setItem('moneyClickerSave', JSON.stringify(autoSave));
   sessionStorage.setItem('moneyClickerSave', JSON.stringify(autoSave));
@@ -187,6 +291,24 @@ function loadGame() {
     cps_display = gameSaveData.cps_display;
     clickerupgradeCost = gameSaveData.clickerupgradeCost;
     fastClickerUpgradeCost = gameSaveData.fastClickerUpgradeCost;
+    // todo: add quantity of upgrades purchased to save data
+
+    printerUpgradeCost = gameSaveData.printerUpgradeCost || 15;
+    grannyUpgradeCost = gameSaveData.grannyUpgradeCost || 100;
+    farmUpgradeCost = gameSaveData.farmUpgradeCost || 300;
+    buyCount = gameSaveData.buyCount || 0;
+    fastClickerCount = gameSaveData.fastClickerCount || 0;
+    printerCount = gameSaveData.printerCount || 0;
+    grannyCount = gameSaveData.grannyCount || 0;
+    farmCount = gameSaveData.farmCount || 0;
+
+    // Update quantity displays after loading
+    upgradeQuantitySpan.textContent = "x" + buyCount;
+    fastQuantitySpan.textContent = "x" + fastClickerCount;
+    printerQuantitySpan.textContent = "x" + printerCount;
+    grannyQuantitySpan.textContent = "x" + grannyCount;
+    farmQuantitySpan.textContent = "x" + farmCount;
+
     updateUI();
     log.log('Game Loaded: $' + money.toFixed(2));
     displayLoadSaveMessage();
@@ -203,30 +325,42 @@ function saveGame() {
     cps: cps,
     cps_display: cps_display,
     clickerupgradeCost: clickerupgradeCost,
-    fastClickerUpgradeCost: fastClickerUpgradeCost
+    fastClickerUpgradeCost: fastClickerUpgradeCost,
+    printerUpgradeCost: printerUpgradeCost,
+    grannyUpgradeCost: grannyUpgradeCost,
+    farmUpgradeCost: farmUpgradeCost,
+    buyCount: buyCount,
+    fastClickerCount: fastClickerCount,
+    printerCount: printerCount,
+    grannyCount: grannyCount,
+    farmCount: farmCount
   };
   localStorage.setItem('moneyClickerSave', JSON.stringify(gameSaveData));
   sessionStorage.setItem('moneyClickerSave', JSON.stringify(gameSaveData));
-  log.log('Game Saved: $' + money.toFixed(2));
-  
+  log.log('Game Saved: $' + money.toFixed(2)); 
 }
-
-// Save Button Logic
-saveBtn.addEventListener('click', () => {
-    saveGame();
-    displayMessage();
-});
-
-// Load Save Button Logic
-loadSaveBtn.addEventListener('click', loadGame);
 
 // Click Button - Play Sound
 clickBtn.addEventListener('click', (e) => {
-    money += clickPower;
-    moneyDisplay.innerText = money.toLocaleString();
-    playClickSound(); // Play sound on click
-    rain();
-    createFloatingText(e.clientX, e.clientY, `+$${clickPower.toFixed(2)}`);
+  money += clickPower;
+  totalClicks += 1; // Increment total clicks
+  moneyDisplay.innerText = money.toLocaleString();
+  // Getting the timestamp in which the click was made
+  last_known_click_time = Date.now();
+  
+  const moneyBag = document.querySelector('#dollar');
+  // Remove animation so it can restart
+  moneyBag.classList.remove('pop');
+
+  // Force browser to reset animation
+  void moneyBag.offsetWidth;
+
+  // Re-add animation
+  moneyBag.classList.add('pop');
+  playClickSound(); // Play sound on click
+  rain();
+  checkAchievements();
+  createFloatingText(e.clientX, e.clientY, `+$${clickPower.toFixed(2)}`);
 });
 
 function createFloatingText(x, y, text) {
@@ -242,23 +376,6 @@ function createFloatingText(x, y, text) {
         el.remove();
     }, 1000); // Matches CSS animation duration
 }
-
-// transform the money image when clicked
-clickBtn.addEventListener('click', () => {
-  // Getting the timestamp in which the click was made
-    last_known_click_time = Date.now();
-    
-    const moneyBag = document.querySelector('#dollar');
-    // Remove animation so it can restart
-    moneyBag.classList.remove('pop');
-
-    // Force browser to reset animation
-    void moneyBag.offsetWidth;
-
-    // Re-add animation
-    moneyBag.classList.add('pop');
-});
-
 
 // CPS Upgrade Logic
 cpsUpgradeBtn.addEventListener('click', () => {
@@ -286,11 +403,11 @@ fastClickerUpgradeBtn.addEventListener('click', () => {
         fastClickerCount += 1; // Increment purchase count
         clickPower += 0.03; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
-        fastClickerUpgradeCost *= 1.3; // Increase cost
+        fastClickerUpgradeCost *= 1.2; // Increase cost
         
         // Update displays
         cpsDisplay.textContent = cps_display += 3;
-       fastQuantitySpan.textContent = "x" + fastClickerCount; // Update quantity display
+        fastQuantitySpan.textContent = "x" + fastClickerCount; // Update quantity display
 
         updateUI();
     }
@@ -304,7 +421,7 @@ printerUpgradeBtn.addEventListener('click', () => {
         printerCount += 1; // Increment purchase count
         // clickPower += 0.1; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
-        printerUpgradeCost *= 1.3; // Increase cost
+        printerUpgradeCost *= 1.2; // Increase cost
 
         // Update displays
         cpsDisplay.textContent = cps_display += 10;
@@ -323,7 +440,7 @@ grannyUpgradeBtn.addEventListener('click', () => {
         grannyCount += 1; // Increment purchase count
         // clickPower += 0.5; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
-        grannyUpgradeCost *= 1.3; // Increase cost
+        grannyUpgradeCost *= 1.1; // Increase cost
 
         // Update displays
         cpsDisplay.textContent = cps_display += 50;
@@ -342,7 +459,7 @@ farmUpgradeBtn.addEventListener('click', () => {
         farmCount += 1; // Increment purchase count
         // clickPower += 0.5; // Increase click power
         moneyDisplay.innerText = money.toLocaleString();
-        farmUpgradeCost *= 1.3; // Increase cost
+        farmUpgradeCost *= 1.1; // Increase cost
 
         // Update displays
         cpsDisplay.textContent = cps_display += 100;
@@ -371,7 +488,8 @@ setInterval(function() {
 // Functions
 function updateUI() {
   checkAndRevealUpgrades();
-
+  initializeAchievements();
+  checkAchievements();
   const now = Date.now();
   const deltaTime = (now - last_known_click_time) / 1000; // in seconds
   last_known_click_time = now;
@@ -382,9 +500,7 @@ function updateUI() {
   money += moneyEarned;
 
   // Getting the current cps
-  cpsDisplay.textContent = cps_display.toFixed(2); 
-
-
+  cpsDisplay.textContent = cps_display;
   moneyDisplay.textContent = money.toFixed(2);
 
   // Show current auto-clicker cost
@@ -418,3 +534,6 @@ function updateUI() {
   manageUpgradeBtn(grannyUpgradeBtn, grannyUpgradeCost, 100);
   manageUpgradeBtn(farmUpgradeBtn, farmUpgradeCost, 300);
 }
+
+// Initial setup on page load
+updateUI();

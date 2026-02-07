@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.min.js" defer></script>
 
     
@@ -22,8 +22,17 @@
 
     <!-- Coin falling -->
     <div id="coin-container"></div>
+    
+    <div class="achievements">
+        <div class="achievements-header">
+            <h3>Achievements</h3>
+        </div>
+        <div id="achievements-grid" class="achievements-grid">
+            <!-- Achievements will be dynamically added here by script.js -->
+        </div>
+    </div>
+
     <div class="game-card">
-        <button id="save-btn">Save</button>
         <button id="load-save-btn">Load Save</button>
         <h1>Money Clicker</h1>
         
@@ -37,7 +46,7 @@
     </div>
 
         
-        <p id="about">Welcome to Money Clicker! Money Clicker is a moderate-paced incremental game 
+        <p id="about">Welcome to Money Clicker! <br> Money Clicker is a moderate-paced incremental game 
             where players start with nothing and build a financial empire one tap at a time.
             From humble beginnings clicking for pocket change to managing massive 
             automated investments and global conglomerates, the game captures the addictive thrill 
@@ -168,24 +177,6 @@
             </div>
         </div>
     </div>
-
-
-    <footer class="game-footer">
-        <h5>What's New (v0.5.2)</h5>
-        <h3>06/01/2026</h3>
-        <ul id="change-log">
-           <li>General bug fixes check changelog.</li>
-           <li>Improved performance and stability.</li>
-           <li>Added next upgrade preview.</li>
-           <li>Created starter achievements</li>
-        </ul>
-
-        
-        <p><a href="https://github.com/MrGamePLAY1/Money-Clicker/blob/main/CHANGELOG.md" target="_blank">View Full Changelog</a></p>
-        <p style="margin-top: 1rem; opacity: 0.6;">Created by MrGamePLAY1</p>
-        <a href="https://buymeacoffee.com/mrgameplay"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=mrgameplay&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
-    </footer>
-
     
     <div id="roadmap">
         <h2>Roadmap</h2>
@@ -214,5 +205,22 @@
             </ul>
         </div>
     </div>
+
+    <footer class="game-footer">
+        <h5>What's New (v0.5.3)</h5>
+        <h3>07/02/2026</h3>
+        <ul id="change-log">
+           <li>General bug fixes check changelog.</li>
+           <li>Added achievement system.</li>
+           <li>Changed changelog positioning.</li>
+           <li>Added capacity to load upgrade quantities from save data.</li>
+           <li>Changed upgrade costs from 1.3x to 1.2x for top tier upgrades.</li>
+        </ul>
+
+        
+        <p><a href="https://github.com/MrGamePLAY1/Money-Clicker/blob/main/CHANGELOG.md" target="_blank">View Full Changelog</a></p>
+        <p style="margin-top: 1rem; opacity: 0.6;">Created by MrGamePLAY1</p>
+        <a href="https://buymeacoffee.com/mrgameplay"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=mrgameplay&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+    </footer>
 </body>
 </html>
