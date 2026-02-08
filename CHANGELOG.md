@@ -115,4 +115,19 @@ PATCH version when you make backward compatible bug fixes
 
 - **UI Improvements:**
   - Added starter achievements.
+
+
 ##
+## [v0.5.4] - 08/02/2026
+- **Optimisations:**
+  -  Replaced the fixed-interval game loop with a new `dynamicLoop` function. This adjusts the UI update rate based on the player's CPS, improving performance, especially at higher income levels.
+  
+- **Fixes:**
+  - The game no longer freezes upon reaching $1.00.
+  - Drastically improved performance by preventing the achievements list from being rebuilt multiple times per second.
+  - Fixed multiple bugs in the income calculation to ensure money per second accurately reflects the player's CPS and Click Power.
+  - Resolved an issue where manual clicks would interfere with and reset passive income generation.
+  - Achievements are now correctly displayed on game load.
+
+- **UI Improvements:**
+  - Improved the styling for locked and upcoming upgrades. The blur effect has been removed in favor of a clear opacity change, making the text readable while still indicating a locked state.
