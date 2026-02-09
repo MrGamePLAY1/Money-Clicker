@@ -84,6 +84,48 @@ const achievements = {
     description: 'Earn your first dollar.',
     unlocked: false,
     condition: () => money >= 1
+  },
+  'millionaire': {
+    name: 'Millionaire Row',
+    description: 'Reach $1,000,000.',
+    unlocked: false,
+    condition: () => money >= 1000000
+  },
+  'CEO': {
+    name: 'S&P 500 CEO',
+    description: 'Reached average CEO wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 0.6
+  },
+  'footballer_cr7': {
+    name: 'Cristiano Ronaldo',
+    description: 'Reached CR7 wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 7.75
+  },
+  'taylor_swift': {
+    name: 'Taylor Swift',
+    description: 'Reached Taylor Swift wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 15.9
+  },
+  'Jensen_huang': {
+    name: 'Jensen Huang',
+    description: 'Reached Jensen Huang wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 485.2
+  },
+  'Daddy_Bezoz': {
+    name: 'Daddy Bezos',
+    description: 'Reached Jeff Bezos wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 920
+  },
+  'Musk': {
+    name: 'Elon Musk',
+    description: 'Reached Elon Musk wealth.',
+    unlocked: false,
+    condition: () => cps_display >= 2750
   }
 }
 
@@ -137,6 +179,30 @@ function checkAchievements() {
   }
   if (money >= 1) {
     unlockAchievement('first_dollar');
+  }
+  if (money >= 1000000) {
+    unlockAchievement('millionaire');
+  }
+  if (cps_display >= .04) {
+    unlockAchievement('Engineer');
+  }
+  if (cps_display >= 0.6) {
+    unlockAchievement('CEO');
+  }
+  if (cps_display >= 7.75) {
+    unlockAchievement('footballer_cr7');
+  }
+  if (cps_display >= 15.9) {
+    unlockAchievement('taylor_swift');
+  }
+  if (cps_display >= 485.2) {
+    unlockAchievement('Jensen_huang');
+  }
+  if (cps_display >= 920) {
+    unlockAchievement('Daddy_Bezoz');
+  }
+  if (cps_display >= 2750) {
+    unlockAchievement('Musk');
   }
 }
 
@@ -224,7 +290,9 @@ function loadGame() {
     cps_display = gameSaveData.cps_display;
     clickerupgradeCost = gameSaveData.clickerupgradeCost;
     fastClickerUpgradeCost = gameSaveData.fastClickerUpgradeCost;
-    // todo: add quantity of upgrades purchased to save data
+    totalClicks = gameSaveData.totalClicks || 0; // Load total clicks, default to 0 if not present
+
+
     buyCount = gameSaveData.buyCount || 0;
     fastClickerCount = gameSaveData.fastClickerCount || 0;
     printerCount = gameSaveData.printerCount || 0;
@@ -266,6 +334,7 @@ function autoSave() {
     clickPower: clickPower,
     cps: cps,
     cps_display: cps_display,
+    totalClicks: totalClicks,
     clickerupgradeCost: clickerupgradeCost,
     fastClickerUpgradeCost: fastClickerUpgradeCost,
     printerUpgradeCost: printerUpgradeCost,
@@ -383,57 +452,57 @@ function createFloatingText(x, y, text) {
 // CPS Upgrade Logic
 cpsUpgradeBtn.addEventListener('click', () => {
     if (money >= clickerupgradeCost) {
-        money -= clickerupgradeCost;
-        cps += 1; // Increase CPS by 1
-        buyCount += 1; // Increment purchase count
-        clickPower += 0.01; // Increase click power
-        moneyDisplay.innerText = money.toLocaleString();
-        clickerupgradeCost *= 5; // Increase cost
-        
-        // Update displays
-        cpsDisplay.textContent = cps_display += 1;
-        dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
-        upgradeQuantitySpan.textContent = "x" + buyCount; // Update quantity display
+      money -= clickerupgradeCost;
+      cps += 1; // Increase CPS by 1
+      buyCount += 1; // Increment purchase count
+      clickPower += 0.01; // Increase click power
+      moneyDisplay.innerText = money.toLocaleString();
+      clickerupgradeCost *= 5; // Increase cost
+      
+      // Update displays
+      cpsDisplay.textContent = cps_display += 1;
+      dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+      upgradeQuantitySpan.textContent = "x" + buyCount; // Update quantity display
 
-        updateUI();
+      updateUI();
     }
 });
 
 // fast Clicker Upgrade Logic
 fastClickerUpgradeBtn.addEventListener('click', () => {
     if (money >= fastClickerUpgradeCost) {
-        money -= fastClickerUpgradeCost;
-        cps += 3; // Increase CPS by 2
-        fastClickerCount += 1; // Increment purchase count
-        clickPower += 0.03; // Increase click power
-        moneyDisplay.innerText = money.toLocaleString();
-        fastClickerUpgradeCost *= 3; // Increase cost
-        
-        // Update displays
-        cpsDisplay.textContent = cps_display += 3;
-        dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
-        fastQuantitySpan.textContent = "x" + fastClickerCount; // Update quantity display
+      money -= fastClickerUpgradeCost;
+      cps += 3; // Increase CPS by 2
+      fastClickerCount += 1; // Increment purchase count
+      clickPower += 0.03; // Increase click power
+      moneyDisplay.innerText = money.toLocaleString();
+      fastClickerUpgradeCost *= 3; // Increase cost
+      
+      // Update displays
+      cpsDisplay.textContent = cps_display += 3;
+      dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+      fastQuantitySpan.textContent = "x" + fastClickerCount; // Update quantity display
 
-        updateUI();
+      updateUI();
     }
 });
 
 // Printer Upgrade Logic
 printerUpgradeBtn.addEventListener('click', () => {
     if (money >= printerUpgradeCost) {
-        money -= printerUpgradeCost;
-        cps += 10; // Increase CPS by 10
-        printerCount += 1; // Increment purchase count
-        // clickPower += 0.1; // Increase click power
-        moneyDisplay.innerText = money.toLocaleString();
-        printerUpgradeCost *= 2; // Increase cost
+      money -= printerUpgradeCost;
+      cps += 10; // Increase CPS by 10
+      printerCount += 1; // Increment purchase count
+      // clickPower += 0.1; // Increase click power
+      moneyDisplay.innerText = money.toLocaleString();
+      printerUpgradeCost *= 2; // Increase cost
 
-        // Update displays
-        cpsDisplay.textContent = cps_display += 10;
-        dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
-        printerQuantitySpan.textContent = "x" + printerCount; // Update quantity display
+      // Update displays
+      cpsDisplay.textContent = cps_display += 10;
+      dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+      printerQuantitySpan.textContent = "x" + printerCount; // Update quantity display
 
-        updateUI();
+      updateUI();
       }
     }
   );
@@ -441,19 +510,19 @@ printerUpgradeBtn.addEventListener('click', () => {
 // Granny Upgrade Logic
 grannyUpgradeBtn.addEventListener('click', () => {
     if (money >= grannyUpgradeCost) {
-        money -= grannyUpgradeCost;
-        cps += 50; // Increase CPS by 50
-        grannyCount += 1; // Increment purchase count
-        // clickPower += 0.5; // Increase click power
-        moneyDisplay.innerText = money.toLocaleString();
-        grannyUpgradeCost *= 2; // Increase cost
+      money -= grannyUpgradeCost;
+      cps += 50; // Increase CPS by 50
+      grannyCount += 1; // Increment purchase count
+      // clickPower += 0.5; // Increase click power
+      moneyDisplay.innerText = money.toLocaleString();
+      grannyUpgradeCost *= 2; // Increase cost
 
-        // Update displays
-        cpsDisplay.textContent = cps_display += 50;
-        dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
-        grannyQuantitySpan.textContent = "x" + grannyCount; // Update quantity display
+      // Update displays
+      cpsDisplay.textContent = cps_display += 50;
+      dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+      grannyQuantitySpan.textContent = "x" + grannyCount; // Update quantity display
 
-        updateUI();
+      updateUI();
       }
     }
   );
@@ -461,18 +530,18 @@ grannyUpgradeBtn.addEventListener('click', () => {
 // Farm Upgrade Logic
 farmUpgradeBtn.addEventListener('click', () => {
     if (money >= farmUpgradeCost) {
-        money -= farmUpgradeCost;
-        cps += 100; // Increase CPS by 50
-        farmCount += 1; // Increment purchase count
-        // clickPower += 0.5; // Increase click power
-        moneyDisplay.innerText = money.toLocaleString();
-        farmUpgradeCost *= 2; // Increase cost
+      money -= farmUpgradeCost;
+      cps += 100; // Increase CPS by 50
+      farmCount += 1; // Increment purchase count
+      // clickPower += 0.5; // Increase click power
+      moneyDisplay.innerText = money.toLocaleString();
+      farmUpgradeCost *= 2; // Increase cost
 
-        // Update displays
-        cpsDisplay.textContent = cps_display += 100;
-        dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
-        farmQuantitySpan.textContent = "x" + farmCount; // Update quantity display
-        updateUI();
+      // Update displays
+      cpsDisplay.textContent = cps_display += 100;
+      dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+      farmQuantitySpan.textContent = "x" + farmCount; // Update quantity display
+      updateUI();
       }
     }
   );
@@ -483,15 +552,16 @@ function gameRun() {
 }
 
 function dynamicLoop() {
-    updateUI();
-    let currentCps = (typeof cps_display !== 'undefined' && cps_display > 0) ? cps_display : 1;
-    let delay = 1000 / currentCps;
-    if(delay < 16) delay = 16;
-    setTimeout(dynamicLoop, delay);
+  updateUI();
+  let currentCps = (typeof cps_display !== 'undefined' && cps_display > 0) ? cps_display : 1;
+  let delay = 1000 / currentCps;
+  if(delay < 16) delay = 16;
+  setTimeout(dynamicLoop, delay);
 }
 dynamicLoop();
 
 setInterval(function() {
+  console.log('Auto-saving game...');
   autoSave();
 }, 120000); // 120,000 milliseconds = 2 minutes
 
@@ -510,14 +580,15 @@ function updateUI() {
 
   // Getting the current cps
   cpsDisplay.textContent = cps_display;
-  moneyDisplay.textContent = money.toFixed(2);
+  moneyDisplay.textContent = money.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   // Show current auto-clicker cost
-  cpsUpgradeCostSpan.textContent = clickerupgradeCost.toFixed(2);
-  fastClickerUpgradeCostSpan.textContent = fastClickerUpgradeCost.toFixed(2);
-  printerUpgradeCostSpan.textContent = printerUpgradeCost.toFixed(2);
-  grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toFixed(2);
-  farmUpgradeCostSpan.textContent = farmUpgradeCost.toFixed(2);
+  cpsUpgradeCostSpan.textContent = clickerupgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+  fastClickerUpgradeCostSpan.textContent = fastClickerUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+  printerUpgradeCostSpan.textContent = printerUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+  grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+  farmUpgradeCostSpan.textContent = farmUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+  dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
 
   // Helper to manage visibility and state
   const manageUpgradeBtn = (btn, cost, baseCost) => {

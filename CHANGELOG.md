@@ -131,3 +131,12 @@ PATCH version when you make backward compatible bug fixes
 
 - **UI Improvements:**
   - Improved the styling for locked and upcoming upgrades. The blur effect has been removed in favor of a clear opacity change, making the text readable while still indicating a locked state.
+
+
+##
+## [v0.5.5] - 09/02/2026
+- **Visuals**
+   - Added more achievements. 
+
+- **UI Improvements:**
+   - Formatted the total money amount earned correctly. 
