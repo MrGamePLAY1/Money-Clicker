@@ -140,3 +140,14 @@ PATCH version when you make backward compatible bug fixes
 
 - **UI Improvements:**
    - Formatted the total money amount earned correctly. 
+
+##
+## [v0.5.6] - 16/02/2026
+- **Fixes:**
+  - Fixed a bug where achievements would unlock incorrectly. 
+  
+- **UI Improvements:**
+  - Added a image for the random event.
+
+- **New Upgrades:**
+  - Added a bonus event which spawns a random upgrade anywhere in the game view.

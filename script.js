@@ -1,4 +1,5 @@
 // Versioning:: MAJOR.MINOR.PATCH
+// Tenser minfify commnad: npx terser script.js -o script.min.js --compress --mangle
 
 
 const log = {
@@ -25,6 +26,7 @@ let farmCount = 0; // Number of Farm upgrades purchased
 // Updgrades
 let cps = 0; // clicks per second (Value)
 let cps_display = 0; // clicks per second (Display)
+let dps_display = 0; // dollars per second (Display)
 
 // Upgrade Costs
 let clickerupgradeCost = 0.1;
@@ -42,6 +44,7 @@ const fastQuantitySpan = document.getElementById('fast-upgrade-quantity');
 const printerQuantitySpan = document.getElementById('printer-upgrade-quantity');
 const grannyQuantitySpan = document.getElementById('granny-upgrade-quantity');
 const farmQuantitySpan = document.getElementById('farm-upgrade-quantity');
+const randomBonus = document.getElementById('random-bonus');
 
 // Hidden Upgrade Button
 const revealUpgradeBtn = document.getElementById('reveal-upgrade-btn');
@@ -95,37 +98,37 @@ const achievements = {
     name: 'S&P 500 CEO',
     description: 'Reached average CEO wealth.',
     unlocked: false,
-    condition: () => cps_display >= 0.6
+    condition: () => dps_display >= 0.6
   },
   'footballer_cr7': {
     name: 'Cristiano Ronaldo',
     description: 'Reached CR7 wealth.',
     unlocked: false,
-    condition: () => cps_display >= 7.75
+    condition: () => dps_display >= 7.75
   },
   'taylor_swift': {
     name: 'Taylor Swift',
     description: 'Reached Taylor Swift wealth.',
     unlocked: false,
-    condition: () => cps_display >= 15.9
+    condition: () => dps_display >= 15.9
   },
   'Jensen_huang': {
     name: 'Jensen Huang',
     description: 'Reached Jensen Huang wealth.',
     unlocked: false,
-    condition: () => cps_display >= 485.2
+    condition: () => dps_display >= 485.2
   },
   'Daddy_Bezoz': {
     name: 'Daddy Bezos',
     description: 'Reached Jeff Bezos wealth.',
     unlocked: false,
-    condition: () => cps_display >= 920
+    condition: () => dps_display >= 920
   },
   'Musk': {
     name: 'Elon Musk',
     description: 'Reached Elon Musk wealth.',
     unlocked: false,
-    condition: () => cps_display >= 2750
+    condition: () => dps_display >= 2750
   }
 }
 
@@ -183,25 +186,22 @@ function checkAchievements() {
   if (money >= 1000000) {
     unlockAchievement('millionaire');
   }
-  if (cps_display >= .04) {
-    unlockAchievement('Engineer');
-  }
-  if (cps_display >= 0.6) {
+  if (dps_display >= 0.6) {
     unlockAchievement('CEO');
   }
-  if (cps_display >= 7.75) {
+  if (dps_display >= 7.75) {
     unlockAchievement('footballer_cr7');
   }
-  if (cps_display >= 15.9) {
+  if (dps_display >= 15.9) {
     unlockAchievement('taylor_swift');
   }
-  if (cps_display >= 485.2) {
+  if (dps_display >= 485.2) {
     unlockAchievement('Jensen_huang');
   }
-  if (cps_display >= 920) {
+  if (dps_display >= 920) {
     unlockAchievement('Daddy_Bezoz');
   }
-  if (cps_display >= 2750) {
+  if (dps_display >= 2750) {
     unlockAchievement('Musk');
   }
 }
@@ -277,6 +277,100 @@ function rain() {
       setTimeout(() => coin.remove(), 2000);
     }, i * 50);
   }
+}
+
+// Random bonus event state
+const bonusEventConfig = {
+  minDelayMs: 300000, // 5 minutes
+  maxDelayMs: 3000000, // 50 minutes
+  displayMs: 9000,
+  iconSizePx: 80,
+  paddingPx: 12
+};
+
+let bonusTimeoutId = null;
+let bonusHideTimeoutId = null;
+let activeBonusKey = null;
+let bonusVisible = false;
+
+function getRandomBonusKey() {
+  const keys = Object.keys(bonus_events);
+  if (keys.length === 0) return null;
+  const index = Math.floor(Math.random() * keys.length);
+  return keys[index];
+}
+
+function getRandomDelay(minMs, maxMs) {
+  return Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
+}
+
+function positionBonus() {
+  const maxX = Math.max(0, window.innerWidth - bonusEventConfig.iconSizePx - bonusEventConfig.paddingPx);
+  const maxY = Math.max(0, window.innerHeight - bonusEventConfig.iconSizePx - bonusEventConfig.paddingPx);
+  const x = Math.floor(Math.random() * maxX) + bonusEventConfig.paddingPx;
+  const y = Math.floor(Math.random() * maxY) + bonusEventConfig.paddingPx;
+  randomBonus.style.left = `${x}px`;
+  randomBonus.style.top = `${y}px`;
+}
+
+function showBonusEvent() {
+  if (bonusVisible) return;
+  activeBonusKey = getRandomBonusKey();
+  if (!activeBonusKey) return;
+
+  positionBonus();
+  randomBonus.classList.remove('hidden');
+  bonusVisible = true;
+
+  if (bonusHideTimeoutId) {
+    clearTimeout(bonusHideTimeoutId);
+  }
+  bonusHideTimeoutId = setTimeout(() => {
+    hideBonusEvent();
+  }, bonusEventConfig.displayMs);
+}
+
+function hideBonusEvent() {
+  if (!bonusVisible) return;
+  bonusVisible = false;
+  activeBonusKey = null;
+  randomBonus.classList.add('hidden');
+  scheduleNextBonusEvent();
+}
+
+function scheduleNextBonusEvent() {
+  if (bonusTimeoutId) {
+    clearTimeout(bonusTimeoutId);
+  }
+  const delay = getRandomDelay(bonusEventConfig.minDelayMs, bonusEventConfig.maxDelayMs);
+  bonusTimeoutId = setTimeout(showBonusEvent, delay);
+}
+
+// List of all possible bonus events
+const bonus_events = {
+  'cps_upgrade': {
+    name: 'Double Click Power!',
+    description: 'Increase your clicks per second.',
+    unlocked: false,
+    effect: () => {
+      clickPower *= 2; // Double click power for 30 seconds
+      updateUI();
+      setTimeout(() => {
+        clickPower /= 2; // Revert back after 30 seconds
+        updateUI();
+      }, 30000);
+    }
+  },
+  'money_bonus': {
+    name: 'Money Bonus!',
+    description: 'Get a random amount of money between $10 and $100.',
+    unlocked: false,
+    effect: () => {
+      const bonusAmount = Math.random() * 90 + 10; // Random amount between 10 and 100
+      money += bonusAmount;
+      updateUI();
+    }
+  },
 }
 
 // Load Save function
@@ -435,6 +529,20 @@ clickBtn.addEventListener('click', (e) => {
   createFloatingText(e.clientX, e.clientY, `+$${clickPower.toFixed(2)}`);
 });
 
+randomBonus.addEventListener('click', () => {
+  if (!bonusVisible || !activeBonusKey) return;
+  const bonus = bonus_events[activeBonusKey];
+  if (bonus && typeof bonus.effect === 'function') {
+    bonus.effect();
+    alertBox.textContent = `${bonus.name} Activated!`;
+    alertBox.classList.remove('hidden');
+    setTimeout(() => {
+      alertBox.classList.add('hidden');
+    }, 2500);
+  }
+  hideBonusEvent();
+});
+
 function createFloatingText(x, y, text) {
     const el = document.createElement('div');
     el.className = 'floating-text';
@@ -588,7 +696,8 @@ function updateUI() {
   printerUpgradeCostSpan.textContent = printerUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
   grannyUpgradeCostSpan.textContent = grannyUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
   farmUpgradeCostSpan.textContent = farmUpgradeCost.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
-  dpsDisplay.textContent = `$${(cps_display * clickPower).toFixed(2)}`;
+  dps_display = cps_display * clickPower;
+  dpsDisplay.textContent = `$${dps_display.toFixed(2)}`;
 
   // Helper to manage visibility and state
   const manageUpgradeBtn = (btn, cost, baseCost) => {
@@ -615,3 +724,4 @@ function updateUI() {
 // Initial setup on page load
 initializeAchievements();
 updateUI();
+scheduleNextBonusEvent();
